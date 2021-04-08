@@ -14,7 +14,9 @@ def maingame():
     val = random.randint (0,diff_range)
 
     print('Enter a prediction between 0 and '+ str(diff_range)) 
-    user_guess = int(input())
+
+    ## Putting a string here breaks the game. Could you come up with a fix?
+    user_guess = int(input()) 
 
     for _ in range(chance):
         if val == user_guess:
@@ -25,15 +27,16 @@ def maingame():
             print ('go higher')
         else:
             print ('go lower')
-        
-        user_guess = int(input())
+
+        user_guess = int(input()) 
     print('You lose, the number I was guessing is '+ str(val)) # the change you asked for.
 
 
 def difficulty():
     try:                                    # I used a try statement so my program doesn't crash when user types two instead of 2
+                                            # I was still able to crash your program typing two
         print('Choose Your difficult. 1 for easy. 2 for medium.  3 for hard :')
-        global game_difficulty               # i made this global variable because I also used it in the loop.
+        global game_difficulty               # i made this global variable because I also used it in the loop.  -->   What loop ?
         game_difficulty = int(input())
     except ValueError:
         print('Use Integers only')
