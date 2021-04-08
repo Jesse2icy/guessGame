@@ -1,17 +1,16 @@
 # Guess game 4
-# Implement a Hard Mode
-
 from random import randint
 import random
 
+# Introduce the user
 def introduction():
     print('Welcome to GuessGame. Ready for the challenge. Enter name:')
-    username = input('')
+    username = str(input())   # the next change will be username must contain certain characters
     print('Welcome ', username)
 
+# This is the main logic of the game 
 def maingame():
     chance , diff_range = difficulty()
-
     val = random.randint (0,diff_range)
 
     print('Enter a prediction between 0 and '+ str(diff_range)) 
@@ -19,7 +18,7 @@ def maingame():
 
     for _ in range(chance):
         if val == user_guess:
-            print('You win')
+            print('You win, I was guessing '+ str(val))
     
             return
         elif user_guess < val:
@@ -28,12 +27,16 @@ def maingame():
             print ('go lower')
         
         user_guess = int(input())
-    print('you lose!!')
+    print('You lose, the number I was guessing is '+ str(val)) # the change you asked for.
 
 
 def difficulty():
-    print('Choose Your difficult. 1 for easy. 2 for medium.  3 for hard :')
-    game_difficulty = int(input())
+    try:                                    # I used a try statement so my program doesn't crash when user types two instead of 2
+        print('Choose Your difficult. 1 for easy. 2 for medium.  3 for hard :')
+        global game_difficulty               # i made this global variable because I also used it in the loop.
+        game_difficulty = int(input())
+    except ValueError:
+        print('Use Integers only')
 
     while game_difficulty != 1 and game_difficulty != 2 and game_difficulty != 3:
         print('Hey idiot, use only 1 , 2 or 3! Enter once again:') ## This tells the user to input the right number.
@@ -43,13 +46,13 @@ def difficulty():
     difficulty_range = 0
 
     if game_difficulty == 1:
-        chances = 5
+        chances = 4                # the user was getting 6 tries since the initial input was not part of the chances.To solve that I decrease the chances by 1.
         difficulty_range = 10
     elif game_difficulty == 2:
-        chances = 5
+        chances = 4
         difficulty_range = 20
     else:
-        chances = 10
+        chances = 9
         difficulty_range = 80
 
     return (chances, difficulty_range)
