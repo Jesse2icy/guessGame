@@ -1,10 +1,12 @@
 # Guess game 4
 from random import randint
 import random
+import sys
 
 # Introduce the user
 def introduction():
     print('Welcome to GuessGame. Ready for the challenge. Enter name:')
+    global username
     username = str(input())   # the next change will be username must contain certain characters
     print('Welcome ', username)
 
@@ -71,9 +73,30 @@ def difficulty():
 
     return (chances, difficulty_range)
 
+def nextround():
+    print('Do you want to give it another try')
+    another_Round= input()
+    another_Round = ['Yes', 'No']
+    while another_Round != 'Yes' and another_Round != 'No':
+        print('Enter Yes or No Enter once again:')
+        another_Round = input()
+    
+
+    if another_Round == 'Yes':
+        print('Here we go ', username)
+        maingame()
+        nextround()
+    elif another_Round == 'No':
+        print('Later Loser! ', username)
+        sys.exit()
+
 def playgame():
     introduction()
     maingame()
+    nextround()
+
+   
+    
     
 ### Game Starts Here
 playgame()
